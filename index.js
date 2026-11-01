@@ -111,6 +111,9 @@ setInterval(() => {
   for (const [t, key] of tokens) if (!rooms.has(key)) tokens.delete(t);
 }, 60 * 60 * 1000);
 
+// Serve the chat app itself from this same server
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+
 // Unknown API routes always return JSON, never the HTML page
 app.use('/api', (req, res) => res.status(404).json({ error: 'API route not found.' }));
 
